@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/v1/coffees")
@@ -17,7 +17,7 @@ public class CoffeeController {
     }
 
     @PatchMapping("/{coffee-id}")
-    public ResponseEntity patchCoffee(@PathVariable("coffee-id") @Min(1) long coffeeId,
+    public ResponseEntity patchCoffee(@PathVariable("coffee-id") @Positive long coffeeId,
                                       @Valid @RequestBody CoffeePatchDTO coffeePatchDTO) {
 
         coffeePatchDTO.setCoffeeId(coffeeId);
