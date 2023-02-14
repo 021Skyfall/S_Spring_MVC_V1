@@ -1,55 +1,63 @@
 package com.code.member;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/v1/members")//, produces = {MediaType.APPLICATION_JSON_VALUE}) // produces 설정 제거
+@RequestMapping("/v1/members")
+@Validated
 public class MemberController {
+    // 회원 정보 등록
     @PostMapping
-//    public String postMember(
-    public ResponseEntity postMember(@RequestParam("email") String email,
-                                     @RequestParam("name") String name,
-                                     @RequestParam("phone") String phone) {
-        // JSON 문자열 수작업을 Map 객체로 대체
-        Map<String,String> map = new LinkedHashMap<>();
-        map.put("email",email);
-        map.put("name",name);
-        map.put("Phone",phone);
-        System.out.println("# email: "+email);
-        System.out.println("# name: "+name);
-        System.out.println("# Phone: "+phone);
+    public ResponseEntity postMember(@Valid @RequestBody MemberPostDTO memberPostDTO) {
+        System.out.println("# email: "+memberPostDTO.getEmail());
+        System.out.println("# name: "+memberPostDTO.getName());
+        System.out.println("# Phone: "+memberPostDTO.getPhone());
 
-//        String response =
-//                "{\"" +
-//                        "email\":\""+email+"\"," +
-//                        "\"name\":\""+name+"\",\"" +
-//                        "phone\":\"" + phone+
-//                        "\"}";
-//        return response;
-
-        return new ResponseEntity<>(map, HttpStatus.CREATED);
+        return new ResponseEntity<>(memberPostDTO, HttpStatus.CREATED);
     }
 
+    // 회원 정보 부분 수정
+    @PatchMapping("/{member-id}")
+    public ResponseEntity patchMember(@PathVariable("member-id") @Min(1) long memberId,
+                                      @Valid @RequestBody MemberPatchDTO memberPatchDTO) {
+        memberPatchDTO.setMemberId(memberId);
+        memberPatchDTO.setName("아무개");
+
+        return new ResponseEntity<>(memberPatchDTO,HttpStatus.OK);
+    }
+
+    // 회원 조회
     @GetMapping("/{member-id}")
-//    public String getMember(@PathVariable("member-id")long memberId) {
     public ResponseEntity getMember(@PathVariable("member-id")long memberId) {
         System.out.println("# memberId : "+memberId);
-//        return null;
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+    // 전체 회원 조히
     @GetMapping
-//    public String getMembers() {
     public ResponseEntity getMembers() {
         System.out.println("# get Members");
-//        return null;
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    // 회원 정보 삭제
+    @DeleteMapping("/{member-id}")
+    public ResponseEntity deleteMember(@PathVariable("member-id") long memberId) {
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
+
+// 코드가 갈 수록 지저분해져서 
+// 어차피 블로그에 과정 전부 작성했으니
+// 앞으로 레거시 코드는 지움
+// 다른 모든 객체도 마찬가지
+// 단, 수정 시 블로깅을 위해 주석처리는 냅두고 이후 단계로 넘어가게되면 삭제
