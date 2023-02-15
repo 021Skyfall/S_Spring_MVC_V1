@@ -13,5 +13,5 @@ public class Coffee {
     private long coffeeId;
     private String engName;
     private String korName;
-    private int price;
+    private Integer price;
 }

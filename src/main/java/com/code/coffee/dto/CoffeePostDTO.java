@@ -12,5 +12,5 @@ public class CoffeePostDTO {
     @Pattern(regexp = "^[가-힣]+$")
     private String korName;
     @Range(min = 1000,max = 50000)
-    private int price;
+    private Integer price;
 }
