@@ -1,28 +1,31 @@
 package com.code.member;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/members")
 @Validated
+@AllArgsConstructor
 public class MemberController {
+    private final MemberService memberService;
+    private final MemberMapper mapper;
+
     // 회원 정보 등록
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberPostDTO memberPostDTO) {
-        System.out.println("# email: "+memberPostDTO.getEmail());
-        System.out.println("# name: "+memberPostDTO.getName());
-        System.out.println("# Phone: "+memberPostDTO.getPhone());
-
-        return new ResponseEntity<>(memberPostDTO, HttpStatus.CREATED);
+        // 매퍼를 사용해서 MemberPostDTO 를 Member 로 변환
+        Member member = mapper.memberPostDTOtoMember(memberPostDTO);
+        Member response = memberService.createMember(member);
+        // 매퍼를 사용해서 Member 를 MemberResponseDTO 로 변환
+        return new ResponseEntity<>(mapper.memberToMemberResponseDTO(response), HttpStatus.CREATED);
     }
 
     // 회원 정보 부분 수정
@@ -30,28 +33,34 @@ public class MemberController {
     public ResponseEntity patchMember(@PathVariable("member-id") @Min(1) long memberId,
                                       @Valid @RequestBody MemberPatchDTO memberPatchDTO) {
         memberPatchDTO.setMemberId(memberId);
-        memberPatchDTO.setName("아무개");
 
-        return new ResponseEntity<>(memberPatchDTO,HttpStatus.OK);
+        Member response = memberService.updateMember(mapper.memberPatchDTOtoMember(memberPatchDTO));
+
+        return new ResponseEntity<>(mapper.memberToMemberResponseDTO(response),HttpStatus.OK);
     }
 
     // 회원 조회
     @GetMapping("/{member-id}")
     public ResponseEntity getMember(@PathVariable("member-id")long memberId) {
-        System.out.println("# memberId : "+memberId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        Member response = memberService.findMember(memberId);
+        return new ResponseEntity<>(mapper.memberToMemberResponseDTO(response),HttpStatus.OK);
     }
 
-    // 전체 회원 조히
+    // 전체 회원 조회
     @GetMapping
     public ResponseEntity getMembers() {
-        System.out.println("# get Members");
-        return new ResponseEntity<>(HttpStatus.OK);
+        List<Member> members = memberService.findMembers();
+        // 매퍼를 사용해서 List<Member>를 MemberResponseDTO 로 변환
+        List<MemberResponseDTO> response = members.stream()
+                .map(mapper::memberToMemberResponseDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     // 회원 정보 삭제
     @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(@PathVariable("member-id") long memberId) {
+        memberService.deleteMember();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
