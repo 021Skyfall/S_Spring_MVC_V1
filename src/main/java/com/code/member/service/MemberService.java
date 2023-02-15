@@ -1,5 +1,6 @@
-package com.code.member;
+package com.code.member.service;
 
+import com.code.member.entity.Member;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

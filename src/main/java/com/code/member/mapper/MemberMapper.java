@@ -1,7 +1,10 @@
-package com.code.member;
+package com.code.member.mapper;
 
+import com.code.member.entity.Member;
+import com.code.member.dto.MemberPatchDTO;
+import com.code.member.dto.MemberPostDTO;
+import com.code.member.dto.MemberResponseDTO;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
 
 //@Component
 //public class MemberMapper {

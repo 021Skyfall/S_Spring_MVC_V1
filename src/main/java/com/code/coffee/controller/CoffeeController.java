@@ -1,5 +1,11 @@
-package com.code.coffee;
+package com.code.coffee.controller;
 
+import com.code.coffee.dto.CoffeePatchDTO;
+import com.code.coffee.dto.CoffeePostDTO;
+import com.code.coffee.dto.CoffeeResponseDTO;
+import com.code.coffee.entity.Coffee;
+import com.code.coffee.mapper.CoffeeMapper;
+import com.code.coffee.service.CoffeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

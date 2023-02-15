@@ -1,5 +1,9 @@
-package com.code.coffee;
+package com.code.coffee.mapper;
 
+import com.code.coffee.dto.CoffeePatchDTO;
+import com.code.coffee.dto.CoffeePostDTO;
+import com.code.coffee.dto.CoffeeResponseDTO;
+import com.code.coffee.entity.Coffee;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

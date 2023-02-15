@@ -1,4 +1,4 @@
-package com.code.member;
+package com.code.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

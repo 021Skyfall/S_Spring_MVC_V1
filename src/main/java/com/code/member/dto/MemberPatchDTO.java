@@ -1,5 +1,6 @@
-package com.code.member;
+package com.code.member.dto;
 
+import com.code.member.NotSpace;
 import lombok.Getter;
 import lombok.Setter;
 

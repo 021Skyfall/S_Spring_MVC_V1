@@ -1,4 +1,4 @@
-package com.code.coffee;
+package com.code.coffee.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

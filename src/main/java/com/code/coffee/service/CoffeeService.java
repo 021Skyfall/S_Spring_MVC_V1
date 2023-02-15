@@ -1,5 +1,6 @@
-package com.code.coffee;
+package com.code.coffee.service;
 
+import com.code.coffee.entity.Coffee;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

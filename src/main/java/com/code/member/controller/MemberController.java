@@ -1,5 +1,11 @@
-package com.code.member;
+package com.code.member.controller;
 
+import com.code.member.entity.Member;
+import com.code.member.mapper.MemberMapper;
+import com.code.member.service.MemberService;
+import com.code.member.dto.MemberPatchDTO;
+import com.code.member.dto.MemberPostDTO;
+import com.code.member.dto.MemberResponseDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
