@@ -5,6 +5,7 @@ import com.code.member.dto.MemberPatchDTO;
 import com.code.member.dto.MemberPostDTO;
 import com.code.member.dto.MemberResponseDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 //@Component
 //public class MemberMapper {
@@ -31,7 +32,7 @@ import org.mapstruct.Mapper;
 //    }
 
 // MapStruct 기반의 MemberMapper 인터페이스 정의
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MemberMapper {
     Member memberPostDTOtoMember(MemberPostDTO memberPostDTO);
     Member memberPatchDTOtoMember(MemberPatchDTO memberPatchDTO);

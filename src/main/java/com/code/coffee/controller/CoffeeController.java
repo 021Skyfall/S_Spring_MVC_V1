@@ -7,6 +7,7 @@ import com.code.coffee.entity.Coffee;
 import com.code.coffee.mapper.CoffeeMapper;
 import com.code.coffee.service.CoffeeService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/v1/coffees")
 @Validated
 @AllArgsConstructor
+@Slf4j
 public class CoffeeController {
     private final CoffeeService coffeeService;
     private final CoffeeMapper mapper;

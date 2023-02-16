@@ -16,11 +16,14 @@ public class CoffeePatchDTO {
 //    private Optional<@Range(min = 1000,max = 50000) Integer> price;
     // 선택적 포함으로 변경
     // -> 바디가 2개 이상이면  에러
-    @Pattern(regexp = "^[a-zA-Z](\\s?[a-zA-Z])*$")
+@Pattern(regexp = "^[a-zA-Z](\\s?[a-zA-Z])*$",
+        message = "영어로만 이루어져 있어야하며 문자 사이에만 공백 한 번 가능합니다.")
     private String engName;
-    @Pattern(regexp = "^[가-힣]+$")
+    @Pattern(regexp = "^[가-힣]+$",
+            message = "한글로만 이루어져 있어야 하며, 공백이 없어야 합니다.")
     private String korName;
-    @Range(min = 1000,max = 50000)
+    @Range(min = 1000,max = 50000,
+            message = "가격은 1000 이상 50000 이하여야 합니다.")
     private Integer price;
 }
 //엥 아니 이거 그냥 아니 아... 이거 그냥 @Pattern 자체가 선택적으로 적용되고 요청 바디에 있으면 돌아가고 없으면 안돌아가고
