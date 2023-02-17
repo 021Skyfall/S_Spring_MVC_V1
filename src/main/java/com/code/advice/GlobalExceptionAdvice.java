@@ -39,18 +39,18 @@ public class GlobalExceptionAdvice {
         return new ResponseEntity<>(response,HttpStatus.valueOf(e.getExceptionCode().getStatus()));
     }
 
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
-    public ErrorResponse handleMethodNotAllowedException(HttpRequestMethodNotSupportedException e) {
-        final ErrorResponse response = ErrorResponse.of(e);
-        return response;
-    }
-
-    // 모든 런타임 예외에 대해 응답
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handleInternalServerException(Exception e) {
-        final ErrorResponse response = ErrorResponse.of(e);
-        return response;
-    }
+//    @ExceptionHandler
+//    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+//    public ErrorResponse handleMethodNotAllowedException(HttpRequestMethodNotSupportedException e) {
+//        final ErrorResponse response = ErrorResponse.of(e);
+//        return response;
+//    }
+//
+//    // 모든 런타임 예외에 대해 응답
+//    @ExceptionHandler
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    public ErrorResponse handleInternalServerException(Exception e) {
+//        final ErrorResponse response = ErrorResponse.of(e);
+//        return response;
+//    }
 }

@@ -33,14 +33,14 @@ public class ErrorResponse {
     public static ErrorResponse of(BusinessLogicException businessLogicException){
         return new ErrorResponse(0,null,BusinessError.of(businessLogicException),null,null);
     }
-    public static ErrorResponse of(HttpRequestMethodNotSupportedException httpRequestMethodNotSupportedException) {
-        return new ErrorResponse(HttpStatus.METHOD_NOT_ALLOWED.value(), HttpStatus.METHOD_NOT_ALLOWED.getReasonPhrase(),null,null,null);
-    }
-
-    // 모든 런타임 에러를 처리하게 끔 변경(해봄)
-    public static ErrorResponse of(Exception e) {
-        return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), null,null,null);
-    }
+//    public static ErrorResponse of(HttpRequestMethodNotSupportedException httpRequestMethodNotSupportedException) {
+//        return new ErrorResponse(HttpStatus.METHOD_NOT_ALLOWED.value(), HttpStatus.METHOD_NOT_ALLOWED.getReasonPhrase(),null,null,null);
+//    }
+//
+//    // 모든 런타임 에러를 처리하게 끔 변경(해봄)
+//    public static ErrorResponse of(Exception e) {
+//        return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), null,null,null);
+//    }
 
     // Request Body 유효성 검증 // (6) Field Error 가공
     @Getter
