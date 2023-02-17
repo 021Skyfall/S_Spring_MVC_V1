@@ -29,7 +29,7 @@ public class MemberController {
 
     // 회원 정보 등록
     @PostMapping
-    public ResponseEntity postMember(@Valid @RequestBody MemberPostDTO memberPostDTO) {
+    public ResponseEntity postMember(@Validated @RequestBody MemberPostDTO memberPostDTO) {
         // 매퍼를 사용해서 MemberPostDTO 를 Member 로 변환
         Member member = mapper.memberPostDTOtoMember(memberPostDTO);
         Member response = memberService.createMember(member);
@@ -40,7 +40,7 @@ public class MemberController {
     // 회원 정보 부분 수정
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") @Min(1) long memberId,
-                                      @Valid @RequestBody MemberPatchDTO memberPatchDTO) {
+                                      @Validated @RequestBody MemberPatchDTO memberPatchDTO) {
         memberPatchDTO.setMemberId(memberId);
 
         Member response = memberService.updateMember(mapper.memberPatchDTOtoMember(memberPatchDTO));

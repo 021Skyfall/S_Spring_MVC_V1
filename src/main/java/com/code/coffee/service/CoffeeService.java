@@ -20,8 +20,7 @@ public class CoffeeService {
     }
     // 커피 조회
     public Coffee findCoffee(long coffeeId) {
-        Coffee coffee = new Coffee(coffeeId,"Caffe Latte","카페라떼",4500);
-        return coffee;
+        throw new RuntimeException("does not exist coffee");
     }
     // 커피 전체 조회
     public List<Coffee> findCoffees() {

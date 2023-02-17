@@ -7,6 +7,8 @@ import com.code.member.dto.MemberResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 //@Component
 //public class MemberMapper {
 //    // MemberPostDTO 를 Member 로 변환
@@ -37,4 +39,6 @@ public interface MemberMapper {
     Member memberPostDTOtoMember(MemberPostDTO memberPostDTO);
     Member memberPatchDTOtoMember(MemberPatchDTO memberPatchDTO);
     MemberResponseDTO memberToMemberResponseDTO(Member member);
+
+    List<MemberResponseDTO> membersToMemberResponseDTO(List<Member> members);
 }

@@ -1,5 +1,7 @@
 package com.code.member.service;
 
+import com.code.exception.BusinessLogicException;
+import com.code.exception.ExceptionCode;
 import com.code.member.entity.Member;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +23,9 @@ public class MemberService {
     }
     // 멤버 조회
     public Member findMember(long memberId) {
-        // member 객체는 나중에 DB에서 조회 하는 것으로 변경 필요
-        Member member = new Member(memberId,"asd@gmail.com","David","010-1111-2222"); // Stub
-        return member;
+        throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
     }
+
     // 전체 멤버 조회
     public List<Member> findMembers() {
         // member 객체는 나중에 DB에서 조회하는 것으로 변경 필요
@@ -35,5 +36,8 @@ public class MemberService {
         return members;
     }
     // 멤버 삭제
-    public void deleteMember(){}
+    public void deleteMember(){
+        String logResult = null;
+        System.out.println(logResult.toUpperCase());
+    }
 }
